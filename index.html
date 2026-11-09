@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="i18n-pending">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>POSTAL 1997 loading screen effect</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+<div class="lang"><label><span data-i18n="lang.label">Cambiar lenguaje:</span> <select id="lang"><option value="es">Español</option><option value="en">English</option><option value="ru" disabled>Русский</option><option value="ja" disabled>日本語</option></select></label></div>
+<h1 data-i18n="page.h1">Efecto de pantalla de carga POSTAL 1997</h1>
+<p class="sub" data-i18n-html="page.sub"><a href="https://github.com/RWS-Studios/POSTAL-SourceCode" target="_blank" rel="noopener noreferrer">Recreación basada en el código fuente de Postal 1997 otorgada por Running With Scissors en GitHub (<code>cutscene.cpp</code> y <code>play.cpp</code>).</a><br>Esto es un fanmade, no es oficial del equipo de Running with Scissors.</p>
+
+<div class="modes">
+<button id="mp" type="button" aria-pressed="true">POSTAL</button>
+<button id="my" type="button" aria-pressed="false">Your Way</button>
+</div>
+
+<div class="stage"><div class="wrap" id="wrap"><canvas id="c" width="640" height="480"></canvas></div><aside id="sup" class="sup"><div class="sup-h"><button id="sup-t" class="sup-t" type="button" aria-expanded="false" data-i18n="sup.t">Apoyar</button><button id="sup-heart" class="sup-heart" type="button" aria-label="Desplegar apoyo" data-i18n-attr="aria-label:sup.heart"><i></i></button></div><div class="sup-dd"><div class="sup-g"><button id="sup-mp" type="button" data-i18n="sup.mp">Mercado Pago</button><button id="sup-ar" type="button" data-i18n="sup.ar">Argentina</button></div><div class="sup-no" data-i18n="sup.no">(NO OBLIGATORIO)</div></div></aside></div>
+
+<div class="actions">
+<div class="dd"><button id="sv" class="ban lg" type="button"><span data-i18n="save">Guardar</span></button></div>
+<div class="pair">
+<label class="ban md" for="f"><span data-i18n="upload.img">Subir imagen</span></label><input id="f" type="file" accept="image/*">
+<div class="bw"><label class="ban md" for="bgf"><span data-i18n="upload.bg">Subir fondo</span></label><input id="bgf" type="file" accept="image/*"><button type="button" class="inf corner" aria-label="Información" data-tip="Solo cambia el fondo de la vista previa para probar cómo se vería el efecto en otro lugar. La imagen con el efecto no se exporta con el fondo: es solo estética." data-i18n-attr="aria-label:a11y.info;data-tip:upload.bg.tip"></button></div>
+</div>
+<div class="row2"><button id="p" class="alt" type="button" data-i18n="btn.pause">Pausar</button><button id="rst" class="alt" type="button" data-i18n="btn.restart">Reiniciar animación</button><button id="all" class="alt" type="button" hidden data-i18n="btn.resetall">Restablecer todo</button><button id="dl" class="alt" type="button" hidden data-i18n="btn.download">Descargar</button><span id="st" class="info"></span></div>
+</div>
+
+<div class="panel"><h2 data-i18n="view.h">Vista (disponible en ambos modos)</h2><div class="grid" id="pv"></div></div>
+
+<div class="panel" id="pp">
+<p class="info" data-i18n-html="postal.info">Valores originales, no editables: giro completo cada <code>3600 ms</code>, separación máxima de <code>24 px</code> entre las dos copias, ciclo de <code>10 s</code> (salen, giran y se juntan durante 5 s, y quedan quietas y juntas otros 5 s), opacidad <code>0.5</code>, <code>15 fps</code> aproximados, grados y píxeles enteros, y efecto aplicado a toda la imagen.</p>
+</div>
+
+<div class="panel" id="py" hidden><h2>Your Way</h2><div class="grid" id="pe"></div></div>
+
+<aside id="side" class="side"><button id="sidebtn" class="tab" type="button" aria-label="Cerrar panel" aria-expanded="true" data-i18n-attr="aria-label:side.close">&gt;</button><div class="links"><a class="lk" href="https://store.steampowered.com/app/232770" target="_blank" rel="noopener noreferrer" data-i18n="link.free">Obtén POSTAL Gratis en Steam</a><a class="lk" href="https://store.steampowered.com/app/401680/POSTAL_Redux/" target="_blank" rel="noopener noreferrer" data-i18n="link.redux">Compra POSTAL Redux en Steam</a></div></aside>
+<div id="modal" class="modal" hidden><div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt"><button type="button" id="x1" class="xb" aria-label="Cerrar" data-i18n-attr="aria-label:a11y.close"></button>
+<h2 id="mt" class="mt" data-i18n="modal.title">Guardar como MP4</h2><p class="ms" data-i18n="modal.sub">Elige la calidad</p>
+<div class="mopts">
+<div><button id="qn" class="ban md" type="button"><span data-i18n="q.normal">Normal</span></button><p class="info" data-i18n="q.normal.info">Tamaño original de la imagen.</p></div>
+<div><button id="qh" class="ban md" type="button"><span data-i18n="q.high">Alta</span></button><p class="info" data-i18n="q.high.info">Ampliada a 1080 px o más, más nítida y más pesada.</p></div>
+</div>
+<button id="qc" class="alt" type="button" data-i18n="cancel">Cancelar</button>
+</div></div>
+<div id="smodal" class="modal sm" hidden><div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt2"><button type="button" id="x2" class="xb" aria-label="Cerrar" data-i18n-attr="aria-label:a11y.close"></button>
+<h2 id="mt2" class="mt" data-i18n="sm.title">Apoyo (NO OBLIGATORIO)</h2>
+<p class="sbt" data-i18n="sm.intro">No es obligatorio para esto, no te cobro para que uses esto, es completamente gratuito y no está vinculado a Running With Scissors ni a POSTAL</p>
+<p class="tx" data-i18n="sm.tx1">Hola.</p>
+<p class="tx" data-i18n="sm.tx2">Gracias por estar usando esta pagina, lo agradezco demasiado, el objetivo de esta pagina es simplemente que estes aqui y ver con curiosidad esta pagina... y quizas darle uso, si haces uso y decides compartirlo es más que suficiente para mi, y estoy muy agradecido contigo ;).</p>
+<p class="tx" data-i18n="sm.tx3">Si bien puedes apoyar un poco, esto solo funciona via mercado pago en Argentina, asi que solo funciona para este ultimo país, esto solo es opcional y facilmente puedes seguir utilizando esta pagina sin abrir esto nunca más, sin embargo si decides apoyar con 5 pesitos, aunque sea menos que nada te agradezco un monton.</p>
+<p class="tx" data-i18n="sm.tx4">Esta pagina fue creada por mi usando Claude como herramienta para hacer el html, hecho con el fin de entretenimiento y uso gratuito, Hecho con el fin de dar un apartado estetico a una imagen y ser utilizada como para material grafico, imagenes compartidas con este efecto, estetica, y demás (como por ejemplo, imagenes para perfiles, gifs, expositores en Steam, etc.) y nada más, la interfaz fue editada y elegida por mi haciendo uso de capturas de pantalla del juego POSTAL 1997, nada fue generado por IA aparte de el codigo con Claude. Los Sprites son de la creacion de Running with Scissors y yo me he dedicado a recortarlos, editarlos y diseñar como se vería. Running with Scissors ni la marca POSTAL no está asociado a esta pagina ni a la caja de ahorro donde se dirige el apoyo, solo la gente en el lenguaje español puede ver esta opcion.</p>
+<p class="tx" data-i18n="sm.tx5">Espero pueda comprenderlo, ¡Gracias por su visita!</p>
+<p class="sbt" style="margin-bottom:4px" data-i18n="sm.alias">Alias / CVU de Mercado Pago (Argentina):</p>
+<div class="spoilbox"><div id="spoil" class="spoil" role="button" tabindex="0" title="Clic para mostrar" data-i18n-attr="title:sm.spoil"><span id="alias">0930300120700214473505</span></div><button id="copy" class="alt" type="button" hidden data-i18n="copy">Copiar</button></div>
+<div class="ban lg static thx"><span data-i18n="sm.thx">Gracias por su visita &lt;3</span></div>
+<div class="opts">
+<button type="button" class="ban md opt o1 oc"><span class="o" data-i18n="sm.o1">Trabaja</span></button>
+<button type="button" class="ban md opt o2 oc"><span class="o" data-i18n="sm.o2">De Acuerdo.</span></button>
+<button type="button" class="ban md opt o3 oc"><span class="o" data-i18n="sm.o3">Hay un puesto debajo de mi escritorio para tu hermana</span></button>
+<button type="button" class="ban md opt o4 oc"><span class="o" data-i18n="sm.o4">Otro momento</span></button>
+</div>
+</div></div>
+</main>
+<script src="js/mp4-muxer.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/swirl.js"></script>
+<script src="js/export.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
